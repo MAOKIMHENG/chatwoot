@@ -1,0 +1,65 @@
+name: Build Chatwoot ARM64 Image
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Docker image version, example: v4.15.1"
+        required: true
+        default: "v4.15.1"
+
+  push:
+    branches:
+      - main
+    paths:
+      - "chatwoot/**"
+      - ".github/workflows/build-chatwoot-arm64.yml"
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: maokimheng/chatwoot-custom
+
+jobs:
+  build-arm64:
+    name: Build ARM64 Chatwoot Image
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: maokimheng
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Set image version
+        id: vars
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "VERSION=latest" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and push ARM64 image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./chatwoot
+          file: ./chatwoot/docker/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.VERSION }}
+            ghcr.io/${{ env.IMAGE_NAME }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
