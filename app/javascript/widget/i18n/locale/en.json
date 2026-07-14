@@ -58,6 +58,7 @@
     "LABEL": "Chat with us"
   },
   "POWERED_BY": "Powered by Chatwoot",
+  "AI_DISCLAIMER": "MAQSU AI can make mistakes. Please verify important info.",
   "EMAIL_PLACEHOLDER": "Please enter your email",
   "CHAT_PLACEHOLDER": "Type your message",
   "TODAY": "Today",

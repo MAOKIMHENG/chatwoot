@@ -15,5 +15,6 @@
       "ERROR_MESSAGE": "Could not connect to Woot Server, Please try again later"
     }
   },
-  "POWERED_BY": "Powered by Chatwoot"
+  "POWERED_BY": "Powered by Chatwoot",
+  "AI_DISCLAIMER": "MAQSU AI can make mistakes. Please verify important info."
 }
