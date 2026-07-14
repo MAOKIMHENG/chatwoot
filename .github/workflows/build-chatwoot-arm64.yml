@@ -54,8 +54,8 @@ jobs:
       - name: Build and push ARM64 image
         uses: docker/build-push-action@v6
         with:
-          context: ./chatwoot
-          file: ./chatwoot/docker/Dockerfile
+          context: .
+          file: ./docker/Dockerfile
           platforms: linux/arm64
           push: true
           tags: |
