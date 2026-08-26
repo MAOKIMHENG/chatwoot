@@ -2,13 +2,13 @@
 
 This file tells an AI assistant which Chatwoot application changes must be preserved when updating this fork from the latest Chatwoot version.
 
-Last reviewed: 2026-07-14
+Last reviewed: 2026-08-26
 
 ## Desired behavior
 
 Replace the original clickable Chatwoot branding and logo with this plain, non-clickable notice:
 
-> MAQSU AI can make mistakes. Please verify important info.
+> MAQSU AI (Beta) may make mistakes.
 
 The notice is shared by the chat widget and survey. It remains hidden when the existing `disableBranding` prop is enabled.
 
@@ -27,7 +27,7 @@ When updating Chatwoot, adapt this behavior to the latest upstream component ins
 Added:
 
 ```json
-"AI_DISCLAIMER": "MAQSU AI can make mistakes. Please verify important info."
+"AI_DISCLAIMER": "MAQSU AI (Beta) may make mistakes."
 ```
 
 ### `app/javascript/survey/i18n/locale/en.json`
@@ -35,7 +35,7 @@ Added:
 Added the same translation because the survey also uses `Branding.vue`:
 
 ```json
-"AI_DISCLAIMER": "MAQSU AI can make mistakes. Please verify important info."
+"AI_DISCLAIMER": "MAQSU AI (Beta) may make mistakes."
 ```
 
 ## Update checklist for an AI assistant
